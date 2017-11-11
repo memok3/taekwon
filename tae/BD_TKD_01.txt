@@ -1,0 +1,172 @@
+-- Creacion de la BD
+CREATE DATABASE TaeKwonDO;
+
+USE TaeKwonDo
+--Creacion de las tablas con su respectivas definicion de datos
+
+CREATE TABLE Comite_Atletico(
+CVE_Com_Atl      int      NOT NULL,
+Nombre           Char(15) NOT NULL,
+Apellido         Char(15) NOT NULL,
+Correo           Char(30) NOT NULL,
+Telefono         Char(12) NOT NULL,
+Id_Gym           int      NOT NULL);
+
+
+CREATE TABLE Torneo(
+Id_Torneo      int         NOT NULL,
+Nombre_Torneo  Char(30)    NOT NULL,
+Gimnasio       Char(20)    NOT NULL,
+Fecha          Date        NOT NULL,
+Hora_Inicio    Date        NOT NULL,
+Hora_Fin       Date        NOT NULL,
+Id_Competidor  int         NOT NULL,
+Id_Gym         int         NOT NULL);
+
+
+CREATE TABLE Gimnasio(
+Id_Gym             int       NOT NULL,
+Nombre_Gym         Char(20)  NOT NULL,
+Ubicacion          Char(50)  NOT NULL,
+Telefono_Gym       Char(12)  NOT NULL,
+Cedula_Profesional  Char(20)  NOT NULL,
+Id_Competidor      int       NOT NULL);
+
+
+CREATE TABLE Competidor(
+Id_Competidor     int       NOT NULL,
+Nombre_Comp       Char(15)  NOT NULL,
+Apellido_Comp     Char(15)  NOT NULL,
+Edad              Char(2)   NOT NULL,
+Sexo              Char(10)  NOT NULL,
+Correo            Char(30)  NOT NULL,
+Telefono          Char(12)  NOT NULL,
+CURP              Char(20)  NOT NULL);
+
+Insert into table Competidor(
+1010,'Ricardo','Hernandez Acosta','22','Masculino','ricardo-hdza94@hotmail.com','5531188869',940811);
+
+
+CREATE TABLE Historial_Competidor(
+CURP               Char(20)   NOT NULL,
+Nombre             Char(15)   NOT NULL,
+Apellido           Char(30)   NOT NULL,
+Nivel_Actual       Char(20)   NOT NULL,
+No_Peleas          Char(4)    NOT NULL,
+No_Ganadas         Char(4)    NOT NULL,
+No_Perdidas        Char(4)    NOT NULL,
+No_Empatadas       Char(4)    NOT NULL,
+No_Descalif        Char(4)    NOT NULL,
+Ptaje_Ganadas_Gen  Char(5)    NOT NULL,
+Ptaje_Perdidas_Act Char(5)    NOT NULL);
+
+CREATE TABLE Entrenadores(
+Cedula_Profesional   Char(20)   NOT NULL,
+Nombre_Entrenador    Char(15)   NOT NULL,
+Apellido_Entrenador  Char(30)   NOT NULL,
+Telefono             Char(12)   NOT NULL,
+CURP_EN              Char(20)   NOT NULL);
+
+CREATE TABLE Historial_Entrenador(
+CURP_EN            Char(20)   NOT NULL,
+Nombre             Char(15)   NOT NULL,
+Apellido           Char(30)   NOT NULL,
+Nivel_Actual       Char(20)   NOT NULL,
+No_Peleas          Char(4)    NOT NULL,
+No_Ganadas         Char(4)    NOT NULL,
+No_Perdidas        Char(4)    NOT NULL,
+No_Empatadas       Char(4)    NOT NULL,
+No_Descalif        Char(4)    NOT NULL);
+
+--Asignaciones de las llaves primarias
+
+ALTER TABLE Comite_Atletico
+ ADD PRIMARY KEY(CVE_Com_Atl);
+
+ALTER TABLE Torneo
+ ADD PRIMARY KEY(Id_Torneo);
+
+ALTER TABLE Gimnasio
+ ADD PRIMARY KEY(Id_Gym);
+
+ALTER TABLE Competidor
+ ADD PRIMARY KEY(Id_Competidor);
+
+ALTER TABLE Historial_Competidor
+ ADD PRIMARY KEY(CURP);
+
+ALTER TABLE Entrenadores
+ ADD PRIMARY KEY(Cedula_Profesional);
+
+ALTER TABLE Historial_Entrenador
+ ADD PRIMARY KEY(CURP_EN);
+
+--Asignacion de las llaves foraneas
+
+ALTER TABLE Comite_Atletico
+    ADD FOREIGN KEY (Id_Gym)
+	REFERENCES Gimnasio (Id_Gym)
+          ON UPDATE CASCADE;
+
+ALTER TABLE Gimnasio
+    ADD FOREIGN KEY (Cedula_Profesional)
+	REFERENCES Entrenadores (Cedula_Profesional)
+          ON UPDATE CASCADE;
+
+ALTER TABLE Gimnasio 
+    ADD FOREIGN KEY (Id_Competidor)
+	REFERENCES Competidor (Id_Competidor)
+          ON UPDATE CASCADE;
+
+
+ALTER TABLE Torneo
+    ADD FOREIGN KEY (Id_Competidor)
+	REFERENCES Competidor (Id_Competidor)
+          ON UPDATE CASCADE;
+
+ALTER TABLE Entrenadores
+    ADD FOREIGN KEY (CURP_EN)
+	REFERENCES Historial_Entrenador (CURP_EN)
+          ON UPDATE CASCADE;
+
+
+ALTER TABLE Competidor
+    ADD FOREIGN KEY (CURP)
+	REFERENCES Historial_Competidor (CURP)
+          ON UPDATE CASCADE;
+
+
+******************LOGIN***************************
+
+
+
+CREATE TABLE Login(
+Id_Usuario           Char(20) NOT NULL,
+Contraseña           Char(15) NOT NULL,
+Tipo_Usuario         Char(15) NOT NULL,
+CVE_Com_Atl          int      NOT NULL,
+Id_Competidor        int      NOT NULL,
+Cedula_Prfesional    Char(20) NOT NULL);
+
+ALTER TABLE Login
+    ADD PRIMARY KEY (Id_Usuario);
+
+
+ALTER TABLE Login
+    ADD FOREIGN KEY (CVE_Com_Atl)
+	REFERENCES Comite_Atletico (CVE_Com_Atl)
+          ON UPDATE CASCADE;
+
+
+ALTER TABLE Login
+    ADD FOREIGN KEY (Id_Competidor)
+	REFERENCES Competidor (Id_Competidor)
+          ON UPDATE CASCADE;
+
+
+ALTER TABLE Login
+    ADD FOREIGN KEY (Cedula_Profesional)
+	REFERENCES Entrenadores (Cedula_Profesional)
+          ON UPDATE CASCADE;
+
+

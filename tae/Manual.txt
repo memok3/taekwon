@@ -1,0 +1,61 @@
+Bien en primer lugar el programa se compone por 4 carpetas y 1 archivo php
+
+------------------------PREFERIRIA ------------------------
+que aquí vayamos registrando todo s los cambios en lo que lo subimos a GIT con poner un * o algo asi
+
+
+------------------------FRONT END------------------------
+primero el archivo index.php:
+    es la página principal que te aventará al principio y sólo es front end con los enlaces ya hecho al login
+
+Ahora el proyecto lo saque de un preset y ya tiene ondas visuales muy "nice" en la carpeta assets, 
+ya trae lo padre y si la checas verás que onda 
+Ni lo he movido porque no le se todavia bien a eso y asi esta en orden todo.
+
+ahora images le vamos a meter algunas imagenes de nuestro agrado ya iremos viendo eso al último.
+
+pags sólo esta el html de info y quería como que dividir todo en módulos pero tendría que afinar eso y eso ya
+requiere tiempo y experiencia para agarrarle la onda. Preferiría dejar sólo esa página ahí.
+
+------------------------BACK END ------------------------
+
+Ahora LO BUENO (carpeta php)
+    --conexion = guardará las variables para conexión de base de datos ahi le puedes meter su config de tu bd
+    
+    --login = es la página con el HTML incluido 
+        ahí conecta y redirecciona a cada tipo de usuario ve las consultas espero le entiendas.
+
+        ******aun no están configurados entrenador ni comité******** 
+        por lo mismo de que sólo hice pruebas con el alumnos ya que sería el mismo código en los otros 2
+            Más adelante explico que onda
+
+    --logout = este módlo hace cerrar la session iniciada y redirecciona a login.php eso está en todas las páginas
+
+    --session = este fue una pruba de sesion sin la tabla de usuarios podía quedar obsoleta y te diré porque
+
+   ------------------------ en  carpeta USUARIOS------------------------
+    aqui están las páginas, cada una es independiente y no jala págs predefinidas tipo
+    Header footer etc... espero entiendas eso
+
+    aqui cada una tiene su php de session y claro tenemos que agregarle los módulos o métodos/consultas 
+    a cada una (por lo mismo ya queque quería hacer módulos tal vez cuando terminemos 
+    y si nos dá tiempo podemos exoerimentar con eso)
+
+        --pag_alumnos = es la página con la que me metí para empezar a jalar todo y ya solo hacer un copy paste
+            ya tiene su session y ya obtiene el nombre completo para mostrarlo 
+            tiene su front end listo para meterle los módulos o métodos/consultas 
+            y esta es la más facil de hacer me parece (pura consulta)
+
+        -comite y entrenador = tienen un botón que los dirge sin tener que iniciar sesión eso lo quería hacer igual
+            que con alumnos obvio amerita su propia consulta y datos en la BD
+            sólo se tendría que copiar lo mismo que está en alumnos y ya trabajar independientes con cada página
+
+------------------------------------AVISO-----------------------------
+
+Me avisas cuando empieces o lo que vayas a editar 
+primero ve todo el código despacio y luego si de plano lo requieres quedamos para hablar o hacer un teamvewer 
+o algo así 
+diría que trabajemos con GitHub primero, pulimos y luego subirlo pero investigemos bien como funciona GitHub
+
+tenemos que por lo menos terminar una página para subirlo a blue y buscar la forma de linquearlo a BD 
+porque en el propio blue ya tiene su control de versiones
